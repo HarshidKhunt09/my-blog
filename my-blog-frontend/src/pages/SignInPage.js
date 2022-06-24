@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../App';
 import useToken from '../auth/useToken';
 
@@ -35,6 +35,11 @@ const SignInPage = () => {
   return (
     <div id='signIn-form'>
       <h2>Sign In</h2>
+      <p>
+        Don't have an account?
+        <Link to='/signUp'> Sign Up</Link>
+      </p>
+      <br />
       <label>
         Email:
         <input

@@ -30,8 +30,4 @@ export const SignUpSchema = new Schema({
   confirmPasswordHash: {
     type: String,
   },
-  isVerified: {
-    type: Boolean,
-    default: false,
-  },
 });

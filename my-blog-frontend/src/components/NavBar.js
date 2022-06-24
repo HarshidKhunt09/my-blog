@@ -21,6 +21,9 @@ const NavBar = () => {
       return (
         <>
           <li>
+            <Link to='/signUp'>Sign Up</Link>
+          </li>
+          <li>
             <Link to='/signIn'>Sign In</Link>
           </li>
         </>
@@ -43,9 +46,6 @@ const NavBar = () => {
         </li>
         <li>
           <Link to='/articles-list'>Articles</Link>
-        </li>
-        <li>
-          <Link to='/signUp'>Sign Up</Link>
         </li>
         <RenderMenu />
       </ul>

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
 import useToken from '../auth/useToken';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
+  // eslint-disable-next-line no-unused-vars
+  const { state, dispatch } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,8 +32,9 @@ const SignUpPage = () => {
     const body = await result.json();
     const { token } = body;
     setToken(token);
+    dispatch({ type: 'USER', payload: true });
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
-    navigate('/signIn');
+    navigate('/');
   };
 
   return (

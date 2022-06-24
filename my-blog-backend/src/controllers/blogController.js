@@ -76,7 +76,6 @@ export const signUp = async (req, res) => {
         email: email,
         passwordHash: passwordHash,
         confirmPasswordHash: confirmPasswordHash,
-        isVerified: false,
       });
 
       await newUser.save();
@@ -87,7 +86,6 @@ export const signUp = async (req, res) => {
         {
           id: _id,
           email: email,
-          isVerified: false,
         },
         'Hello',
         {
@@ -118,13 +116,13 @@ export const signIn = async (req, res) => {
 
     if (!userExist) return res.status(500).json({ error: 'User not Found' });
 
-    const { _id: id, passwordHash, isVerified } = userExist;
+    const { _id: id, passwordHash } = userExist;
 
     const isCorrect = await bcrypt.compare(password, passwordHash);
 
     if (isCorrect) {
       jwt.sign(
-        { id, email, isVerified },
+        { id, email },
         'Hello',
         {
           expiresIn: '2d',
