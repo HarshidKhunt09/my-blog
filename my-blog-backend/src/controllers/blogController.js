@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import { BlogSchema } from '../models/blogModel';
 import { SignUpSchema } from '../models/blogModel';
@@ -57,16 +58,48 @@ export const addComments = async (req, res) => {
 
 export const signUp = async (req, res) => {
   try {
-    let newUser = new Users(req.body);
+    const { name, email, password, confirmPassword } = req.body;
+    const userExist = await Users.findOne({ email: email });
 
-    if (newUser.password != newUser.confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
+      return res.status(422).json({ error: 'Plz filled the field properly' });
+    } else if (userExist) {
+      return res.status(422).json({ error: 'Email already Exist' });
+    } else if (password != confirmPassword) {
       return res.status(422).json({ error: 'Password are not matching' });
     } else {
-      newUser.password = await bcrypt.hash(newUser.password, 12);
-      newUser.confirmPassword = await bcrypt.hash(newUser.confirmPassword, 12);
+      const passwordHash = await bcrypt.hash(password, 10);
+      const confirmPasswordHash = await bcrypt.hash(confirmPassword, 10);
 
-      const User = await newUser.save();
-      res.status(201).send(User);
+      const newUser = new Users({
+        name: name,
+        email: email,
+        passwordHash: passwordHash,
+        confirmPasswordHash: confirmPasswordHash,
+        isVerified: false,
+      });
+
+      await newUser.save();
+
+      const { _id } = newUser;
+
+      jwt.sign(
+        {
+          id: _id,
+          email: email,
+          isVerified: false,
+        },
+        'Hello',
+        {
+          expiresIn: '2d',
+        },
+        (error, token) => {
+          if (error) {
+            return res.status(500).send(error);
+          }
+          res.status(200).json({ token });
+        }
+      );
     }
   } catch (error) {
     res.status(400).send(error);
@@ -75,33 +108,34 @@ export const signUp = async (req, res) => {
 
 export const signIn = async (req, res) => {
   try {
-    let token;
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Please filled the data' });
+      return res.status(400).json({ error: 'Plz filled the data' });
     }
 
-    const User = await Users.findOne({ email: email });
+    const userExist = await Users.findOne({ email: email });
 
-    if (User) {
-      const isMatch = await bcrypt.compare(password, User.password);
+    if (!userExist) return res.status(500).json({ error: 'User not Found' });
 
-      token = await User.generateAuthToken();
-      console.log(token);
+    const { _id: id, passwordHash, isVerified } = userExist;
 
-      res.cookie('jwtToken', token, {
-        expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
-      });
+    const isCorrect = await bcrypt.compare(password, passwordHash);
 
-      if (!isMatch) {
-        res.status(400).json({ error: 'Invalid Credentials' });
-      } else {
-        res.json({ message: 'user signIn successfully ' });
-      }
-    } else {
-      res.status(400).json({ error: 'Invalid Credential' });
+    if (isCorrect) {
+      jwt.sign(
+        { id, email, isVerified },
+        'Hello',
+        {
+          expiresIn: '2d',
+        },
+        (error, token) => {
+          if (error) {
+            return res.status(500).send(error);
+          }
+          res.status(200).json({ token });
+        }
+      );
     }
   } catch (error) {
     res.status(500).send(error);

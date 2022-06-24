@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import useToken from '../auth/useToken';
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useToken();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,14 +20,18 @@ const SignUpPage = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
-    await fetch('api/signUp', {
+    const result = await fetch('api/signUp', {
       method: 'post',
       body: JSON.stringify(formData),
       headers: {
         'Content-Type': 'application/json',
       },
     });
+    const body = await result.json();
+    const { token } = body;
+    setToken(token);
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+    navigate('/signIn');
   };
 
   return (

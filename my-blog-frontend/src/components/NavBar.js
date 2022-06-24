@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
+  const signOut = () => {
+    localStorage.removeItem('token');
+  };
+
   return (
     <nav>
       <ul>
@@ -19,6 +23,11 @@ const NavBar = () => {
         </li>
         <li>
           <Link to='/signUp'>Sign Up</Link>
+        </li>
+        <li>
+          <Link to='/signUp' onClick={signOut}>
+            Sign Out
+          </Link>
         </li>
       </ul>
     </nav>

@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -25,19 +24,14 @@ export const SignUpSchema = new Schema({
   email: {
     type: String,
   },
-  password: {
+  passwordHash: {
     type: String,
   },
-  confirmPassword: {
+  confirmPasswordHash: {
     type: String,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
   },
 });
-
-SignUpSchema.methods.generateAuthToken = function () {
-  try {
-    let token = jwt.sign({ _id: this._id }, 'Hello');
-    return token;
-  } catch (error) {
-    console.log(error);
-  }
-};

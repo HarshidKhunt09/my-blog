@@ -7,8 +7,11 @@ import UpvotesSection from '../components/UpvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
 import articleContent from './article-content';
+import useToken from '../auth/useToken';
 
 const ArticlePage = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useToken();
   const { name } = useParams();
   const navigate = useNavigate();
   const article = articleContent.find((article) => article.name === name);
@@ -21,25 +24,24 @@ const ArticlePage = () => {
         const result = await fetch(`/api/articles/${name}`, {
           method: 'GET',
           headers: {
+            Authorization: `Bearer ${token}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
           credentials: 'include',
         });
         const body = await result.json();
-        setArticleInfo(body);
-
-        if (!result.status === 200) {
-          const error = new Error(result.error);
-          throw error;
+        const { message } = body;
+        if (message === 'Unable to verify token' && result.status === 401) {
+          navigate('/signUp');
         }
+        setArticleInfo(body);
       } catch (error) {
         console.log(error);
-        navigate('/signUp');
       }
     };
     fetchData();
-  }, [name, navigate]);
+  }, [name, navigate, token]);
 
   if (!article) return <NotFoundPage />;
 

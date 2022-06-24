@@ -7,6 +7,7 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import NotFoundPage from './pages/NotFoundPage';
 import NavBar from './components/NavBar';
+import PrivateRoute from './auth/PrivateRoute';
 import './App.css';
 
 function App() {
@@ -18,7 +19,14 @@ function App() {
           <Route path='/' element={<HomePage />} exact />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/articles-list' element={<ArticleListPage />} />
-          <Route path='/article/:name' element={<ArticlePage />} />
+          <Route
+            path='/article/:name'
+            element={
+              <PrivateRoute>
+                <ArticlePage />
+              </PrivateRoute>
+            }
+          />
           <Route path='/signIn' element={<SignInPage />} />
           <Route path='/signUp' element={<SignUpPage />} />
           <Route path='*' element={<NotFoundPage />} />

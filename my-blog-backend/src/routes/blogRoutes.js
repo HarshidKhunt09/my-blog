@@ -4,7 +4,6 @@ import {
   addComments,
   signUp,
   signIn,
-  about,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 

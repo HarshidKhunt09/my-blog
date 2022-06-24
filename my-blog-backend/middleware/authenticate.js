@@ -1,19 +1,15 @@
 import jwt from 'jsonwebtoken';
-import { Users } from '../src/controllers/blogController';
 
 export const authenticate = async (req, res, next) => {
   try {
-    const token = req.cookies.jwtToken;
-    const verifyToken = jwt.verify(token, 'Hello');
+    const { authorization } = req.headers;
 
-    const rootUser = await Users.findOne({ _id: verifyToken._id });
+    const token = authorization.split(' ')[1];
 
-    if (!rootUser) {
-      throw new Error('User not Found');
-    }
+    jwt.verify(token, 'Hello');
 
     next();
   } catch (error) {
-    res.status(401).send('Unauthorized: No token provided');
+    res.status(401).json({ message: 'Unable to verify token' });
   }
 };
