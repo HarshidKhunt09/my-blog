@@ -141,3 +141,7 @@ export const signIn = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+export const signOut = (req, res) => {
+  res.status(200).send({ message: 'signOut successfully' });
+};

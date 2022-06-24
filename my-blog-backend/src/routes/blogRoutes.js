@@ -4,6 +4,7 @@ import {
   addComments,
   signUp,
   signIn,
+  signOut,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 
@@ -11,6 +12,8 @@ const routes = (app) => {
   app.route('/api/signUp').post(signUp);
 
   app.route('/api/signIn').post(signIn);
+
+  app.route('/api/signOut').get(signOut);
 
   app.route('/api/articles/:name').get(authenticate, getArticle);
 

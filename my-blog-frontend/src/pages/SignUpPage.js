@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import useToken from '../auth/useToken';
 
 const SignUpPage = () => {
@@ -37,11 +36,6 @@ const SignUpPage = () => {
   return (
     <div id='signUp-form'>
       <h2>Sign Up</h2>
-      <p>
-        Already have an account?
-        <Link to='/signIn'> Sign in</Link>
-      </p>
-      <br />
       <label>
         Name:
         <input

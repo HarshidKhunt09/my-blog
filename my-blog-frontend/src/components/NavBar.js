@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../App';
 
 const NavBar = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { state, dispatch } = useContext(UserContext);
+
+  const RenderMenu = () => {
+    if (state) {
+      return (
+        <>
+          <li>
+            <Link to='/signOut' onClick={signOut}>
+              Sign Out
+            </Link>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <li>
+            <Link to='/signIn'>Sign In</Link>
+          </li>
+        </>
+      );
+    }
+  };
+
   const signOut = () => {
-    localStorage.removeItem('token');
+    return localStorage.removeItem('token');
   };
 
   return (
@@ -19,16 +45,9 @@ const NavBar = () => {
           <Link to='/articles-list'>Articles</Link>
         </li>
         <li>
-          <Link to='/signIn'>Sign In</Link>
-        </li>
-        <li>
           <Link to='/signUp'>Sign Up</Link>
         </li>
-        <li>
-          <Link to='/signUp' onClick={signOut}>
-            Sign Out
-          </Link>
-        </li>
+        <RenderMenu />
       </ul>
     </nav>
   );
