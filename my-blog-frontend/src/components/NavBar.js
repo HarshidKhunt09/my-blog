@@ -1,19 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import useToken from '../auth/useToken';
 
 const NavBar = () => {
-  // eslint-disable-next-line no-unused-vars
+  const [token] = useToken();
+
   const { state, dispatch } = useContext(UserContext);
+
+  console.log(token);
+
+  useEffect(() => {
+    if (token) {
+      dispatch({ type: 'USER', payload: true });
+    } else {
+      dispatch({ type: 'USER', payload: false });
+    }
+  }, [dispatch, token]);
 
   const RenderMenu = () => {
     if (state) {
       return (
         <>
           <li>
-            <Link to='/signOut' onClick={signOut}>
-              Sign Out
-            </Link>
+            <Link to='/signOut'>Sign Out</Link>
           </li>
         </>
       );
@@ -29,10 +39,6 @@ const NavBar = () => {
         </>
       );
     }
-  };
-
-  const signOut = () => {
-    return localStorage.removeItem('token');
   };
 
   return (

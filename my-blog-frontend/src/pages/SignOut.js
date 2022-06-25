@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { UserContext } from '../App';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
 
 const SignOut = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const SignOut = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`/api/signOut`, {
+      await fetch(`/api/signOut`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -18,13 +18,9 @@ const SignOut = () => {
         },
         credentials: 'include',
       });
-      if (result.status === 200) {
-        dispatch({ type: 'USER', payload: false });
-        navigate('/signIn');
-      } else {
-        const error = new Error(result.error);
-        throw error;
-      }
+      localStorage.removeItem('token');
+      dispatch({ type: 'USER', payload: false });
+      navigate('/signIn');
     };
     fetchData();
   });

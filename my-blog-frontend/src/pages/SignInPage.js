@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../App';
 import useToken from '../auth/useToken';
 
 const SignInPage = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { state, dispatch } = useContext(UserContext);
+
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
-  // eslint-disable-next-line no-unused-vars
-  const { state, dispatch } = useContext(UserContext);
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const onChange = (e) => {
@@ -27,8 +28,9 @@ const SignInPage = () => {
     const body = await result.json();
     const { token } = body;
     setToken(token);
-    dispatch({ type: 'USER', payload: true });
+    console.log(token);
     setFormData({ email: '', password: '' });
+    dispatch({ type: 'USER', payload: true });
     navigate('/');
   };
 

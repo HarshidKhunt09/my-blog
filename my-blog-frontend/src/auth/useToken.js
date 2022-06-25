@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 const useToken = () => {
-  const [token, setTokenInterval] = useState(() => {
+  const [token, setTokenInternal] = useState(() => {
     return localStorage.getItem('token');
   });
 
   const setToken = (newToken) => {
     localStorage.setItem('token', newToken);
-    setTokenInterval(newToken);
+    setTokenInternal(newToken);
   };
 
   return [token, setToken];
