@@ -130,11 +130,21 @@ nav a:hover {
 
 #articles-body input {
   display: block;
-  width: 300px;
+  width: 250px;
   padding: 8px;
   border-radius: 8px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   border: 2px solid black;
-  margin-bottom: 16px;
+} 
+
+#articles-body button {
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 20px;
 }
