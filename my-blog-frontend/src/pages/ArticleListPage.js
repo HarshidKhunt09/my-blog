@@ -4,15 +4,21 @@ import articleContent from './article-content';
 
 const ArticleListPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy] = useState('title');
+  const [sortBy, setSortBy] = useState('title');
   const [orderBy, setOrderBy] = useState('normal');
 
   const FilteredArticleList = articleContent
     .filter((article) => {
       return article.title.toLowerCase().includes(searchTerm.toLowerCase());
+      // || article.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
     .sort((a, b) => {
-      if (orderBy === 'asc' || orderBy === 'des') {
+      if (
+        orderBy === 'asc' ||
+        orderBy === 'des' ||
+        sortBy === 'title' ||
+        sortBy === 'name'
+      ) {
         let order = orderBy === 'asc' ? 1 : -1;
         return a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
           ? -1 * order
@@ -27,9 +33,12 @@ const ArticleListPage = () => {
       <input
         type='text'
         placeholder='Search Articles'
-        value={searchTerm}
+        value={searchTerm || ''}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <br />
+      <button onClick={() => setSortBy('title')}>Title</button>
+      <button onClick={() => setSortBy('name')}>Name</button>
       <br />
       <button onClick={() => setOrderBy('asc')}>Ascending</button>
       <button onClick={() => setOrderBy('des')}>Descending</button>

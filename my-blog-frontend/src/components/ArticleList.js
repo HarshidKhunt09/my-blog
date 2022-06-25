@@ -12,6 +12,7 @@ const ArticleList = ({ articles }) => {
             to={`/article/${article.name}`}
           >
             <h3>{article.title}</h3>
+            <h6>Name: {article.name}</h6>
             <p>{article.content[0].substring(0, 150)}...</p>
           </Link>
         );

@@ -1,6 +1,6 @@
 const articles = [
   {
-    name: 'learn-react',
+    name: 'Easily-learn-react',
     title: 'The Fastest Way to Learn React',
     content: [
       `Welcome! Today we're going to be talking about the fastest way to
@@ -25,7 +25,7 @@ const articles = [
     ],
   },
   {
-    name: 'learn-node',
+    name: 'Fastestway-to-learn-node',
     title: 'How to Build a Node Server in 10 Minutes',
     content: [
       `In this article, we're going to be talking looking at a very quick way
