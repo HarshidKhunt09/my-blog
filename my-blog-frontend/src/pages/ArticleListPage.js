@@ -13,12 +13,7 @@ const ArticleListPage = () => {
       // || article.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
     .sort((a, b) => {
-      if (
-        orderBy === 'asc' ||
-        orderBy === 'des' ||
-        sortBy === 'title' ||
-        sortBy === 'name'
-      ) {
+      if (orderBy === 'asc' || orderBy === 'des') {
         let order = orderBy === 'asc' ? 1 : -1;
         return a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
           ? -1 * order
