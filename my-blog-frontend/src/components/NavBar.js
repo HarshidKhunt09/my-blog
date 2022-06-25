@@ -8,8 +8,6 @@ const NavBar = () => {
 
   const { state, dispatch } = useContext(UserContext);
 
-  console.log(token);
-
   useEffect(() => {
     if (token) {
       dispatch({ type: 'USER', payload: true });

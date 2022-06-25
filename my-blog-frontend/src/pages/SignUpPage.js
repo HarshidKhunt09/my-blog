@@ -36,7 +36,7 @@ const SignUpPage = () => {
     setToken(token);
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
     navigate('/');
-    dispatch({ type: 'USER', payload: false });
+    dispatch({ type: 'USER', payload: true });
   };
 
   return (
