@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -29,5 +30,26 @@ export const SignUpSchema = new Schema({
   },
   confirmPasswordHash: {
     type: String,
+  },
+});
+
+export const ArticlesInfoSchema = new Schema({
+  _id: {
+    type: ObjectId,
+  },
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  articleName: {
+    type: String,
+  },
+  articleTitle: {
+    type: String,
+  },
+  articleContent: {
+    type: Array,
   },
 });

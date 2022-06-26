@@ -5,6 +5,7 @@ import {
   signUp,
   signIn,
   signOut,
+  addArticle,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 
@@ -20,6 +21,8 @@ const routes = (app) => {
   app.route('/api/articles/:name/upvote').post(addUpvotes);
 
   app.route('/api/articles/:name/add-comment').post(addComments);
+
+  app.route('/api/articles/add-article').post(addArticle);
 };
 
 export default routes;

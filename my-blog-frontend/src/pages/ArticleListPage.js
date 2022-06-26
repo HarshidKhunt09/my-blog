@@ -22,8 +22,6 @@ const ArticleListPage = () => {
       return articleContent;
     });
 
-  console.log(searchTerm);
-
   return (
     <div id='articles-body'>
       <h1>Articles</h1>

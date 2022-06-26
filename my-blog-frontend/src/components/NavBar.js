@@ -21,6 +21,9 @@ const NavBar = () => {
       return (
         <>
           <li>
+            <Link to='/add-article'>Add Article</Link>
+          </li>
+          <li>
             <Link to='/signOut'>Sign Out</Link>
           </li>
         </>

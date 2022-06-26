@@ -1,11 +1,15 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import { BlogSchema } from '../models/blogModel';
-import { SignUpSchema } from '../models/blogModel';
+import {
+  ArticlesInfoSchema,
+  BlogSchema,
+  SignUpSchema,
+} from '../models/blogModel';
 
 export const Articles = mongoose.model('Articles', BlogSchema);
 export const Users = mongoose.model('Users', SignUpSchema);
+export const ArticlesInfo = mongoose.model('ArticlesInfo', ArticlesInfoSchema);
 
 export const getArticle = async (req, res) => {
   try {
@@ -86,6 +90,7 @@ export const signUp = async (req, res) => {
         {
           id: _id,
           email: email,
+          name: name,
         },
         'Hello',
         {
@@ -122,7 +127,7 @@ export const signIn = async (req, res) => {
 
     if (isCorrect) {
       jwt.sign(
-        { id, email },
+        { id, email, name: userExist.name },
         'Hello',
         {
           expiresIn: '2d',
@@ -142,4 +147,27 @@ export const signIn = async (req, res) => {
 
 export const signOut = (req, res) => {
   res.status(200).send({ message: 'signOut successfully' });
+};
+
+export const addArticle = async (req, res) => {
+  try {
+    const { _id, name, email, articleName, articleTitle, articleContent } =
+      req.body;
+
+    const articleContentArray = articleContent.split(',');
+
+    const newArticle = new ArticlesInfo({
+      _id,
+      name,
+      email,
+      articleName,
+      articleTitle,
+      articleContent: articleContentArray,
+    });
+
+    const article = await newArticle.save();
+    res.status(201).send(article);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };

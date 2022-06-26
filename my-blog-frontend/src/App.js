@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ArticleListPage from './pages/ArticleListPage';
 import ArticlePage from './pages/ArticlePage';
+import AddArticlePage from './pages/AddArticlePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import SignOut from './pages/SignOut';
@@ -35,6 +36,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path='/add-article' element={<AddArticlePage />} />
             <Route path='/signIn' element={<SignInPage />} />
             <Route path='/signUp' element={<SignUpPage />} />
             <Route path='/signOut' element={<SignOut />} />

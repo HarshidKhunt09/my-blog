@@ -32,7 +32,7 @@ nav {
 
 nav ul {
   list-style-type: none;
-  margin-left: 450px;
+  margin-left: 430px;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
@@ -171,4 +171,31 @@ nav a:hover {
 #articles-body .orderBy{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
+}
+
+#add-article-form input {
+  display: block;
+  width: 450px;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  border: 2px solid black;
+  margin-bottom: 16px;
+}
+
+#add-article-form textarea {
+  display: block;
+  width: 600px;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  border: 2px solid black;
+  margin-bottom: 16px;
+}
+
+#add-article-form button {
+  margin-top: 15px;
+  width: 180px;
 }
