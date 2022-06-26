@@ -14,13 +14,15 @@ const ArticleListPage = () => {
     })
     .sort((a, b) => {
       if (orderBy === 'asc' || orderBy === 'des') {
-        let order = orderBy === 'asc' ? 1 : -1;
+        const order = orderBy === 'asc' ? 1 : -1;
         return a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
           ? -1 * order
           : 1 * order;
       }
       return articleContent;
     });
+
+  console.log(searchTerm);
 
   return (
     <div id='articles-body'>
@@ -31,13 +33,15 @@ const ArticleListPage = () => {
         value={searchTerm || ''}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <br />
-      <button onClick={() => setSortBy('title')}>Title</button>
-      <button onClick={() => setSortBy('name')}>Name</button>
-      <br />
-      <button onClick={() => setOrderBy('asc')}>Ascending</button>
-      <button onClick={() => setOrderBy('des')}>Descending</button>
-      <button onClick={() => setOrderBy('normal')}>Normal</button>
+      <div className='sortBy'>
+        Sort By: <button onClick={() => setSortBy('title')}>Title</button>
+        <button onClick={() => setSortBy('name')}>Name</button>
+      </div>
+      <div className='orderBy'>
+        Order By: <button onClick={() => setOrderBy('asc')}>Ascending</button>
+        <button onClick={() => setOrderBy('des')}>Descending</button>
+        <button onClick={() => setOrderBy('normal')}>Normal</button>
+      </div>
       <ArticleList articles={FilteredArticleList} />
     </div>
   );

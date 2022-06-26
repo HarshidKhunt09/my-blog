@@ -24,7 +24,6 @@ h6 {
 
 nav {
   border-bottom: 4px solid black;
-  text-align: center;
   position: fixed;
   top: 0;
   width: 100%;
@@ -33,7 +32,9 @@ nav {
 
 nav ul {
   list-style-type: none;
-  margin: 0;
+  margin-left: 450px;
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 0;
 }
 
@@ -57,7 +58,7 @@ nav a:hover {
 
 #page-body {
   max-width: 700px;
-  margin: auto;
+  margin-left: 440px;
   padding-top: 64px;
 }
 
@@ -151,11 +152,23 @@ nav a:hover {
   color: white;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 16px;
+  margin-left: 5px;
 }
 
 #articles-body button:focus{
   background: olive;
 }
 
+#articles-body .sortBy{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#articles-body .orderBy{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
