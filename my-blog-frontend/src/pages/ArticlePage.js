@@ -47,6 +47,7 @@ const ArticlePage = () => {
         });
         const body = await result.json();
         setArticleInfo(body);
+        console.log(body);
       } catch (error) {
         console.log(error);
       }

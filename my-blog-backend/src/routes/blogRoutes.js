@@ -8,6 +8,7 @@ import {
   addArticle,
   getArticlesList,
   saveArticle,
+  yourArticles,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 
@@ -19,6 +20,8 @@ const routes = (app) => {
   app.route('/api/signOut').get(signOut);
 
   app.route('/api/articles/add-article').post(authenticate, addArticle);
+
+  app.route('/api/articles/your-articles').get(authenticate, yourArticles);
 
   app
     .route('/api/articles/:name')

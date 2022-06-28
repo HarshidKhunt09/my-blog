@@ -24,6 +24,9 @@ const NavBar = () => {
             <Link to='/add-article'>Add Article</Link>
           </li>
           <li>
+            <Link to='/articles/your-articles'>Your Articles</Link>
+          </li>
+          <li>
             <Link to='/signOut'>Sign Out</Link>
           </li>
         </>

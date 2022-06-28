@@ -9,6 +9,7 @@ import SignUpPage from './pages/SignUpPage';
 import SignOut from './pages/SignOut';
 import NotFoundPage from './pages/NotFoundPage';
 import NavBar from './components/NavBar';
+import YourArticlesList from './components/YourArticlesList';
 import PrivateRoute from './auth/PrivateRoute';
 import './App.css';
 import { createContext, useReducer, useState } from 'react';
@@ -48,6 +49,10 @@ function App() {
                 element={
                   <AddArticlePage addArticlesHandler={addArticlesHandler} />
                 }
+              />
+              <Route
+                path='/articles/your-articles'
+                element={<YourArticlesList />}
               />
               <Route path='/signIn' element={<SignInPage />} />
               <Route path='/signUp' element={<SignUpPage />} />

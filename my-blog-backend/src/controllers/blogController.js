@@ -211,3 +211,26 @@ export const saveArticle = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+export const yourArticles = async (req, res) => {
+  try {
+    const articles = await ArticlesInfo.find();
+
+    const yourArticleContent = articles
+      .filter((article) => {
+        const { name } = req.rootUser;
+        if (article.name === name) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .map((article) => {
+        return article.articlesDetail;
+      });
+
+    res.status(200).send(yourArticleContent);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
