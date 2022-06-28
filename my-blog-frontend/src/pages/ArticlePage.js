@@ -6,7 +6,7 @@ import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
-import articleContent from './article-content';
+// import articleContent from './article-content';
 import useToken from '../auth/useToken';
 
 const ArticlePage = () => {
@@ -14,9 +14,45 @@ const ArticlePage = () => {
   const [token, setToken] = useToken();
   const { name } = useParams();
   const navigate = useNavigate();
-  const article = articleContent.find((article) => article.name === name);
+  const [articleList, setArticleList] = useState([]);
+  const article = articleList.find((article) => article.name === name);
 
   const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [] });
+
+  useEffect(() => {
+    const fetchArticlesData = async () => {
+      const result = await fetch('/api/articles-list', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const body = await result.json();
+      setArticleList(body);
+    };
+    fetchArticlesData();
+  }, [setArticleList]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetch(`/api/articles/${name}`, {
+          method: 'post',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+        const body = await result.json();
+        setArticleInfo(body);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [name]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,9 +81,7 @@ const ArticlePage = () => {
 
   if (!article) return <NotFoundPage />;
 
-  const otherArticles = articleContent.filter(
-    (article) => article.name !== name
-  );
+  const otherArticles = articleList.filter((article) => article.name !== name);
 
   return (
     <>

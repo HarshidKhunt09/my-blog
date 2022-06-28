@@ -89,8 +89,6 @@ export const signUp = async (req, res) => {
       jwt.sign(
         {
           id: _id,
-          email: email,
-          name: name,
         },
         'Hello',
         {
@@ -127,7 +125,7 @@ export const signIn = async (req, res) => {
 
     if (isCorrect) {
       jwt.sign(
-        { id, email, name: userExist.name },
+        { id },
         'Hello',
         {
           expiresIn: '2d',
@@ -151,22 +149,64 @@ export const signOut = (req, res) => {
 
 export const addArticle = async (req, res) => {
   try {
-    const { _id, name, email, articleName, articleTitle, articleContent } =
-      req.body;
+    const { articleName, articleTitle, articleContent } = req.body;
 
     const articleContentArray = articleContent.split(',');
 
+    const { _id, name, email } = req.rootUser;
+
     const newArticle = new ArticlesInfo({
-      _id,
       name,
       email,
-      articleName,
-      articleTitle,
-      articleContent: articleContentArray,
+      articlesDetail: {
+        name: articleName,
+        title: articleTitle,
+        content: articleContentArray,
+      },
+      creatorId: _id,
     });
 
     const article = await newArticle.save();
     res.status(201).send(article);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const getArticlesList = async (req, res) => {
+  try {
+    const articles = await ArticlesInfo.find();
+
+    const articleContent = articles.map((article, key) => {
+      return article.articlesDetail;
+    });
+
+    res.status(200).send(articleContent);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const saveArticle = async (req, res) => {
+  try {
+    const articleName = req.params.name;
+    const articleInfo = await ArticlesInfo.find({
+      'articlesDetail.name': articleName,
+    });
+    if (articleInfo) {
+      const article = await Articles.find({ name: articleName });
+      if (article.length === 0) {
+        const newArticleData = new Articles({
+          name: articleName,
+        });
+        await newArticleData.save();
+        res.status(200).send(newArticleData);
+      } else {
+        res.status(200).send(article[0]);
+      }
+    } else {
+      res.status(500).send(error);
+    }
   } catch (error) {
     res.status(500).send(error);
   }

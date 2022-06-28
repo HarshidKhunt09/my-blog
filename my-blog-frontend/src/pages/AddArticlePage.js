@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
-import useUser from '../auth/useUser';
+import useToken from '../auth/useToken';
 
-const AddArticlePage = () => {
-  const user = useUser();
+const AddArticlePage = ({ addArticlesHandler }) => {
+  const [token] = useToken();
 
   const [articleName, setArticleName] = useState('');
   const [articleTitle, setArticleTitle] = useState('');
   const [articleContent, setArticleContent] = useState([]);
 
   const addArticle = async () => {
+    console.log({ articleName, articleTitle, articleContent });
     const result = await fetch('/api/articles/add-article', {
       method: 'post',
       body: JSON.stringify({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
         articleName,
         articleTitle,
         articleContent,
       }),
       headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
     const body = await result.json();
-    console.log(body);
+
+    addArticlesHandler(body.articlesDetail);
   };
 
   return (

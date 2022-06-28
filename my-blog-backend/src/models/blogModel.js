@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -9,6 +8,7 @@ export const BlogSchema = new Schema({
   },
   upvotes: {
     type: Number,
+    default: 0,
   },
   comments: [
     {
@@ -34,22 +34,19 @@ export const SignUpSchema = new Schema({
 });
 
 export const ArticlesInfoSchema = new Schema({
-  _id: {
-    type: ObjectId,
-  },
   name: {
     type: String,
   },
   email: {
     type: String,
   },
-  articleName: {
-    type: String,
+  articlesDetail: {
+    name: { type: String },
+    title: { type: String },
+    content: { type: Array },
   },
-  articleTitle: {
-    type: String,
-  },
-  articleContent: {
-    type: Array,
+  creatorId: {
+    type: Schema.Types.ObjectId,
+    ref: 'SignUpSchema',
   },
 });

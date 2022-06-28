@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArticleList from '../components/ArticleList';
-import articleContent from './article-content';
+// import articleContent from './article-content';
+// import { ArticlesDataContext } from '../App';
 
 const ArticleListPage = () => {
+  // const data = useContext(ArticlesDataContext);
+
+  const [articleList, setArticleList] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('title');
   const [orderBy, setOrderBy] = useState('normal');
 
-  const FilteredArticleList = articleContent
+  useEffect(() => {
+    const fetchArticlesData = async () => {
+      const result = await fetch('/api/articles-list', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const body = await result.json();
+      setArticleList(body);
+    };
+    fetchArticlesData();
+  }, [setArticleList]);
+
+  const FilteredArticleList = articleList
     .filter((article) => {
       return article.title.toLowerCase().includes(searchTerm.toLowerCase());
       // || article.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -19,7 +39,7 @@ const ArticleListPage = () => {
           ? -1 * order
           : 1 * order;
       }
-      return articleContent;
+      return articleList;
     });
 
   return (
