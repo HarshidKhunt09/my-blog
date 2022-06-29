@@ -234,3 +234,18 @@ export const yourArticles = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+export const deleteArticle = async (req, res) => {
+  try {
+    const articleName = req.params.name;
+    const articleInfo = await ArticlesInfo.findOne({
+      'articlesDetail.name': articleName,
+    });
+    const article = await Articles.findOne({ name: articleName });
+    const deleteArticle = await ArticlesInfo.findByIdAndDelete(articleInfo._id);
+    const deleteArticleData = await Articles.findByIdAndDelete(article._id);
+    res.send(deleteArticleData);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
