@@ -27,7 +27,8 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: white;
+  background-color: white;
+  z-index: 2;
 }
 
 nav ul {
@@ -71,6 +72,11 @@ nav a:hover {
 .article-list-item p {
   padding-bottom: 32px;
   border-bottom: 2px solid black;
+}
+
+.article-list-item a{
+  text-decoration: none;
+  color: black;
 }
 
 #add-comment-form {
@@ -198,4 +204,13 @@ nav a:hover {
 #add-article-form button {
   margin-top: 15px;
   width: 180px;
+}
+
+#article-list {
+  position: relative;
+}
+
+#delete-icon {
+  position: absolute;
+  right: 50px;
 }

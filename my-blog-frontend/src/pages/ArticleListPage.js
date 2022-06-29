@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArticleList from '../components/ArticleList';
-// import articleContent from './article-content';
-// import { ArticlesDataContext } from '../App';
 
 const ArticleListPage = () => {
-  // const data = useContext(ArticlesDataContext);
-
   const [articleList, setArticleList] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState('');

@@ -6,33 +6,20 @@ import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
-// import articleContent from './article-content';
 import useToken from '../auth/useToken';
 
-const ArticlePage = () => {
+const ArticlePage = ({ articleList }) => {
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
   const { name } = useParams();
   const navigate = useNavigate();
-  const [articleList, setArticleList] = useState([]);
   const article = articleList.find((article) => article.name === name);
 
-  const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [] });
-
-  useEffect(() => {
-    const fetchArticlesData = async () => {
-      const result = await fetch('/api/articles-list', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const body = await result.json();
-      setArticleList(body);
-    };
-    fetchArticlesData();
-  }, [setArticleList]);
+  const [articleInfo, setArticleInfo] = useState({
+    name: '',
+    upvotes: 0,
+    comments: [{ username: '', text: '' }],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +34,6 @@ const ArticlePage = () => {
         });
         const body = await result.json();
         setArticleInfo(body);
-        console.log(body);
       } catch (error) {
         console.log(error);
       }
@@ -80,9 +66,9 @@ const ArticlePage = () => {
     fetchData();
   }, [name, navigate, token]);
 
-  if (!article) return <NotFoundPage />;
-
   const otherArticles = articleList.filter((article) => article.name !== name);
+
+  if (!article) return <NotFoundPage />;
 
   return (
     <>

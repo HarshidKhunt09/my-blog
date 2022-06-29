@@ -28,7 +28,6 @@ const SignInPage = () => {
     const body = await result.json();
     const { token } = body;
     setToken(token);
-    console.log(token);
     setFormData({ email: '', password: '' });
     dispatch({ type: 'USER', payload: true });
     navigate('/');

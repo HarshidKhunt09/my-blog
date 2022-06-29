@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArticleList from './ArticleList';
+import YourArticleList from '../components/YourArticleList';
 import useToken from '../auth/useToken';
 
-const YourArticlesList = () => {
+const YourArticleListPage = () => {
   const navigate = useNavigate();
   const [token] = useToken();
   const [yourArticleList, setYourArticleList] = useState([]);
@@ -34,7 +34,12 @@ const YourArticlesList = () => {
     fetchData();
   }, [navigate, setYourArticleList, token]);
 
-  return <ArticleList articles={yourArticleList} />;
+  return (
+    <>
+      <h1>Your Articles</h1>
+      <YourArticleList articles={yourArticleList} />
+    </>
+  );
 };
 
-export default YourArticlesList;
+export default YourArticleListPage;

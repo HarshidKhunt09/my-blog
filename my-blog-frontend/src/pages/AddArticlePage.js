@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useToken from '../auth/useToken';
 
-const AddArticlePage = ({ addArticlesHandler }) => {
+const AddArticlePage = () => {
   const [token] = useToken();
 
   const [articleName, setArticleName] = useState('');
@@ -9,8 +9,7 @@ const AddArticlePage = ({ addArticlesHandler }) => {
   const [articleContent, setArticleContent] = useState([]);
 
   const addArticle = async () => {
-    console.log({ articleName, articleTitle, articleContent });
-    const result = await fetch('/api/articles/add-article', {
+    await fetch('/api/articles/add-article', {
       method: 'post',
       body: JSON.stringify({
         articleName,
@@ -24,9 +23,9 @@ const AddArticlePage = ({ addArticlesHandler }) => {
       },
       credentials: 'include',
     });
-    const body = await result.json();
-
-    addArticlesHandler(body.articlesDetail);
+    setArticleName('');
+    setArticleTitle('');
+    setArticleContent([]);
   };
 
   return (
