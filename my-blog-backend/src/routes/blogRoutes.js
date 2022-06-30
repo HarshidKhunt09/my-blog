@@ -10,6 +10,7 @@ import {
   saveArticle,
   yourArticles,
   deleteArticle,
+  updateArticle,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 
@@ -28,7 +29,8 @@ const routes = (app) => {
     .route('/api/articles/:name')
     .get(authenticate, getArticle)
     .post(saveArticle)
-    .delete(deleteArticle);
+    .delete(deleteArticle)
+    .put(updateArticle);
 
   app.route('/api/articles/:name/upvote').post(addUpvotes);
 

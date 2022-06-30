@@ -4,6 +4,7 @@ import AboutPage from './pages/AboutPage';
 import ArticleListPage from './pages/ArticleListPage';
 import ArticlePage from './pages/ArticlePage';
 import AddArticlePage from './pages/AddArticlePage';
+import EditArticlePage from './pages/EditArticlePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import SignOut from './pages/SignOut';
@@ -58,6 +59,10 @@ function App() {
             <Route
               path='/articles/your-articles'
               element={<YourArticleListPage />}
+            />
+            <Route
+              path='/article/edit/:name'
+              element={<EditArticlePage articleList={articleList} />}
             />
             <Route path='/signIn' element={<SignInPage />} />
             <Route path='/signUp' element={<SignUpPage />} />

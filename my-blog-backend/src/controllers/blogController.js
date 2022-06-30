@@ -249,3 +249,27 @@ export const deleteArticle = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+export const updateArticle = async (req, res) => {
+  try {
+    const articleName = req.params.name;
+    const articleInfo = await ArticlesInfo.findOne({
+      'articlesDetail.name': articleName,
+    });
+    const { name, title, content } = req.body;
+    const articleContentArray = content.split(',');
+
+    const updateArticle = await ArticlesInfo.findByIdAndUpdate(
+      articleInfo._id,
+      {
+        $set: { articlesDetail: { name, title, content: articleContentArray } },
+      },
+      { new: true, useFindAndModify: false }
+    );
+
+    let updatedNewArticle = updateArticle.articlesDetail;
+    res.send(updatedNewArticle);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+};

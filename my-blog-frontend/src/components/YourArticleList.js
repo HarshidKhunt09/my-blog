@@ -20,12 +20,14 @@ const YourArticleList = ({ articles, deleteArticleHandler }) => {
                 height='25px'
                 onClick={() => deleteArticleHandler(article.name)}
               />
-              <img
-                id='edit-icon'
-                src={editIcon}
-                alt='edit-icon'
-                height='25px'
-              />
+              <Link to={`/article/edit/${article.name}`}>
+                <img
+                  id='edit-icon'
+                  src={editIcon}
+                  alt='edit-icon'
+                  height='25px'
+                />
+              </Link>
             </div>
             <Link to={`/article/${article.name}`}>
               <h6>Name: {article.name}</h6>
