@@ -28,9 +28,9 @@ const routes = (app) => {
   app
     .route('/api/articles/:name')
     .get(authenticate, getArticle)
-    .post(saveArticle)
-    .delete(deleteArticle)
-    .put(updateArticle);
+    .post(authenticate, saveArticle)
+    .delete(authenticate, deleteArticle)
+    .put(authenticate, updateArticle);
 
   app.route('/api/articles/:name/upvote').post(addUpvotes);
 

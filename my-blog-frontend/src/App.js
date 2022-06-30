@@ -38,6 +38,8 @@ function App() {
     fetchArticlesData();
   }, [setArticleList]);
 
+  console.log(articleList);
+
   return (
     <div>
       <UserContext.Provider value={{ state, dispatch }}>
@@ -55,7 +57,15 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path='/add-article' element={<AddArticlePage />} />
+            <Route
+              path='/add-article'
+              element={
+                <AddArticlePage
+                  articleList={articleList}
+                  setArticleList={setArticleList}
+                />
+              }
+            />
             <Route
               path='/articles/your-articles'
               element={<YourArticleListPage />}

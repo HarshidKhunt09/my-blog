@@ -35,14 +35,17 @@ const YourArticleListPage = () => {
 
   const deleteArticleHandler = async (name) => {
     try {
-      await fetch(`/api/articles/${name}`, {
+      const result = await fetch(`/api/articles/${name}`, {
         method: 'delete',
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         credentials: 'include',
       });
+      const body = await result.json();
+      console.log(body);
       const newYourArticleList = yourArticleList.filter((yourArticle) => {
         return yourArticle.name !== name;
       });

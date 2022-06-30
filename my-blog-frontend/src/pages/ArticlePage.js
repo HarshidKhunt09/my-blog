@@ -27,6 +27,7 @@ const ArticlePage = () => {
         const result = await fetch(`/api/articles/${name}`, {
           method: 'post',
           headers: {
+            Authorization: `Bearer ${token}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
@@ -39,7 +40,7 @@ const ArticlePage = () => {
       }
     };
     fetchData();
-  }, [name]);
+  }, [name, token]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import useToken from '../auth/useToken';
 
-const EditArticlePage = ({ articleList, updateArticleHandler }) => {
+const EditArticlePage = ({ articleList }) => {
   const { name } = useParams();
   const navigate = useNavigate();
+  const [token] = useToken();
 
   const articleDetail = articleList.find((article) => article.name === name);
 
@@ -26,6 +28,7 @@ const EditArticlePage = ({ articleList, updateArticleHandler }) => {
             content: articleContent,
           }),
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });

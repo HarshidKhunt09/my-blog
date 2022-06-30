@@ -167,7 +167,7 @@ export const addArticle = async (req, res) => {
     });
 
     const article = await newArticle.save();
-    res.status(201).send(article);
+    res.status(201).send(article.articlesDetail);
   } catch (error) {
     res.status(500).send(error);
   }
