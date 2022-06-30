@@ -26,7 +26,6 @@ const YourArticleListPage = () => {
           navigate('/signUp');
         }
         setYourArticleList(body);
-        console.log(body);
       } catch (error) {
         console.log(error);
       }
@@ -34,10 +33,32 @@ const YourArticleListPage = () => {
     fetchData();
   }, [navigate, setYourArticleList, token]);
 
+  const deleteArticleHandler = async (name) => {
+    try {
+      await fetch(`/api/articles/${name}`, {
+        method: 'delete',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const newYourArticleList = yourArticleList.filter((yourArticle) => {
+        return yourArticle.name !== name;
+      });
+      setYourArticleList(newYourArticleList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <h1>Your Articles</h1>
-      <YourArticleList articles={yourArticleList} />
+      <YourArticleList
+        articles={yourArticleList}
+        deleteArticleHandler={deleteArticleHandler}
+      />
     </>
   );
 };

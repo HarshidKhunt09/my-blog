@@ -2,21 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import deleteIcon from '../icons/delete.png';
 
-const YourArticleList = ({ articles }) => {
-  const deleteArticle = async (name) => {
-    try {
-      await fetch(`/api/articles/${name}`, {
-        method: 'delete',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const YourArticleList = ({ articles, deleteArticleHandler }) => {
+  // const deleteArticle = async (name) => {
+  //   try {
+  //     await fetch(`/api/articles/${name}`, {
+  //       method: 'delete',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       credentials: 'include',
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -32,7 +32,7 @@ const YourArticleList = ({ articles }) => {
                 src={deleteIcon}
                 alt='delete-icon'
                 height='25px'
-                onClick={() => deleteArticle(article.name)}
+                onClick={() => deleteArticleHandler(article.name)}
               />
             </div>
             <Link to={`/article/${article.name}`}>

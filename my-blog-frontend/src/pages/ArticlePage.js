@@ -8,12 +8,12 @@ import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
 import useToken from '../auth/useToken';
 
-const ArticlePage = ({ articleList }) => {
+const ArticlePage = () => {
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
   const { name } = useParams();
   const navigate = useNavigate();
-  const article = articleList.find((article) => article.name === name);
+  const [articleList, setArticleList] = useState([]);
 
   const [articleInfo, setArticleInfo] = useState({
     name: '',
@@ -59,7 +59,6 @@ const ArticlePage = ({ articleList }) => {
           navigate('/signUp');
         }
         setArticleInfo(body);
-        console.log(body);
       } catch (error) {
         console.log(error);
       }
@@ -67,6 +66,22 @@ const ArticlePage = ({ articleList }) => {
     fetchData();
   }, [name, navigate, setArticleInfo, token]);
 
+  useEffect(() => {
+    const fetchArticlesData = async () => {
+      const result = await fetch('/api/articles-list', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const body = await result.json();
+      setArticleList(body);
+    };
+    fetchArticlesData();
+  }, [setArticleList]);
+
+  const article = articleList.find((article) => article.name === name);
   const otherArticles = articleList.filter((article) => article.name !== name);
 
   if (!article) return <NotFoundPage />;
