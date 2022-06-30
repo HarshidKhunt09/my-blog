@@ -1,23 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import deleteIcon from '../icons/delete.png';
+import editIcon from '../icons/edit.png';
 
 const YourArticleList = ({ articles, deleteArticleHandler }) => {
-  // const deleteArticle = async (name) => {
-  //   try {
-  //     await fetch(`/api/articles/${name}`, {
-  //       method: 'delete',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Content-Type': 'application/json',
-  //       },
-  //       credentials: 'include',
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <>
       {articles.map((article, key) => {
@@ -33,6 +19,12 @@ const YourArticleList = ({ articles, deleteArticleHandler }) => {
                 alt='delete-icon'
                 height='25px'
                 onClick={() => deleteArticleHandler(article.name)}
+              />
+              <img
+                id='edit-icon'
+                src={editIcon}
+                alt='edit-icon'
+                height='25px'
               />
             </div>
             <Link to={`/article/${article.name}`}>

@@ -213,4 +213,11 @@ nav a:hover {
 #delete-icon {
   position: absolute;
   right: 50px;
+  cursor: pointer;
+}
+
+#edit-icon {
+  position: absolute;
+  right: 90px;
+  cursor: pointer;
 }
