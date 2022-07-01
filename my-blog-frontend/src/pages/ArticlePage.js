@@ -8,12 +8,11 @@ import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
 import useToken from '../auth/useToken';
 
-const ArticlePage = () => {
+const ArticlePage = ({ articleList }) => {
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
   const { name } = useParams();
   const navigate = useNavigate();
-  const [articleList, setArticleList] = useState([]);
 
   const [articleInfo, setArticleInfo] = useState({
     name: '',
@@ -67,38 +66,25 @@ const ArticlePage = () => {
     fetchData();
   }, [name, navigate, setArticleInfo, token]);
 
-  useEffect(() => {
-    const fetchArticlesData = async () => {
-      const result = await fetch('/api/articles-list', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const body = await result.json();
-      setArticleList(body);
-    };
-    fetchArticlesData();
-  }, [setArticleList]);
-
-  const article = articleList.find((article) => article.name === name);
-  const otherArticles = articleList.filter((article) => article.name !== name);
+  const article = articleList?.find((article) => article?.name === name);
+  const otherArticles = articleList?.filter(
+    (article) => article?.name !== name
+  );
 
   if (!article) return <NotFoundPage />;
 
   return (
     <>
-      <h1>{article.title}</h1>
+      <h1>{article?.title}</h1>
       <UpvotesSection
         articleName={name}
         articleInfo={articleInfo}
         setArticleInfo={setArticleInfo}
       />
-      {article.content.map((paragraph, key) => {
+      {article?.content?.map((paragraph, key) => {
         return <p key={key}>{paragraph}</p>;
       })}
-      <CommentsList comments={articleInfo.comments} />
+      <CommentsList comments={articleInfo?.comments} />
       <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
       <h3>Other Articles:</h3>
       <ArticleList articles={otherArticles} />

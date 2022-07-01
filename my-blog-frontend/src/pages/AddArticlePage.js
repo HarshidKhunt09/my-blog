@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useToken from '../auth/useToken';
 
 const AddArticlePage = ({ articleList, setArticleList }) => {
   const [token] = useToken();
+  const navigate = useNavigate();
 
   const [articleName, setArticleName] = useState('');
   const [articleTitle, setArticleTitle] = useState('');
@@ -28,6 +30,7 @@ const AddArticlePage = ({ articleList, setArticleList }) => {
     setArticleName('');
     setArticleTitle('');
     setArticleContent([]);
+    navigate('/articles/your-articles');
   };
 
   return (

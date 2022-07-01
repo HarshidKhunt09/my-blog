@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import NotFoundPage from './NotFoundPage';
 import useToken from '../auth/useToken';
 
-const EditArticlePage = ({ articleList }) => {
+const EditArticlePage = ({ articleList, setArticleList }) => {
   const { name } = useParams();
   const navigate = useNavigate();
   const [token] = useToken();
 
-  const articleDetail = articleList.find((article) => article.name === name);
+  const articleDetail = articleList?.find((article) => article?.name === name);
 
-  const Content = articleDetail.content.toString();
+  console.log({ articleDetail });
 
-  const [articleName, setArticleName] = useState(articleDetail.name);
-  const [articleTitle, setArticleTitle] = useState(articleDetail.title);
-  const [articleContent, setArticleContent] = useState(Content);
+  const [articleName, setArticleName] = useState(articleDetail?.name);
+  const [articleTitle, setArticleTitle] = useState(articleDetail?.title);
+  const [articleContent, setArticleContent] = useState(
+    articleDetail?.content?.toString()
+  );
 
   const updateArticle = (e) => {
     e.preventDefault();
     const updatedData = async () => {
       try {
-        await fetch(`/api/articles/${name}`, {
+        const result = await fetch(`/api/articles/${name}`, {
           method: 'put',
           body: JSON.stringify({
             name: articleName,
@@ -32,6 +35,12 @@ const EditArticlePage = ({ articleList }) => {
             'Content-Type': 'application/json',
           },
         });
+        const body = await result.json();
+        setArticleList(
+          articleList?.map((article) => {
+            return article?.name === body?.name ? { ...body } : article;
+          })
+        );
         setArticleName('');
         setArticleTitle('');
         setArticleContent('');
@@ -43,8 +52,10 @@ const EditArticlePage = ({ articleList }) => {
     updatedData();
   };
 
+  if (!articleDetail) return <NotFoundPage />;
+
   return (
-    <div id='add-article-form'>
+    <div id='update-article-form'>
       <h1>Update Article</h1>
       <label>
         Article Name:

@@ -17,28 +17,38 @@ import { createContext, useReducer, useState, useEffect } from 'react';
 import { initialState, reducer } from './reducer/UseReducer';
 
 export const UserContext = createContext();
-export const ArticleDataContext = createContext();
 
 function App() {
   const [articleList, setArticleList] = useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchArticlesData = async () => {
-      const result = await fetch('/api/articles-list', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const body = await result.json();
-      setArticleList(body);
+      try {
+        const result = await fetch('/api/articles-list', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+        const body = await result.json();
+        setArticleList(body);
+        setLoading(false);
+        console.log(body);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchArticlesData();
   }, [setArticleList]);
 
-  console.log(articleList);
+  if (loading)
+    return (
+      <h1 style={{ marginTop: '100px', marginLeft: '200px' }}>Loading...</h1>
+    );
 
   return (
     <div>
@@ -48,7 +58,10 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} exact />
             <Route path='/about' element={<AboutPage />} />
-            <Route path='/articles-list' element={<ArticleListPage />} />
+            <Route
+              path='/articles-list'
+              element={<ArticleListPage articleList={articleList} />}
+            />
             <Route
               path='/article/:name'
               element={
@@ -72,7 +85,12 @@ function App() {
             />
             <Route
               path='/article/edit/:name'
-              element={<EditArticlePage articleList={articleList} />}
+              element={
+                <EditArticlePage
+                  articleList={articleList}
+                  setArticleList={setArticleList}
+                />
+              }
             />
             <Route path='/signIn' element={<SignInPage />} />
             <Route path='/signUp' element={<SignUpPage />} />

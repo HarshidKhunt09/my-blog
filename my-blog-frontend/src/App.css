@@ -179,7 +179,7 @@ nav a:hover {
   font-weight: bold;
 }
 
-#add-article-form input {
+#add-article-form input, #update-article-form input {
   display: block;
   width: 450px;
   padding: 8px;
@@ -190,7 +190,7 @@ nav a:hover {
   margin-bottom: 16px;
 }
 
-#add-article-form textarea {
+#add-article-form textarea, #update-article-form textarea {
   display: block;
   width: 600px;
   padding: 8px;
@@ -201,7 +201,7 @@ nav a:hover {
   margin-bottom: 16px;
 }
 
-#add-article-form button {
+#add-article-form button, #update-article-form button {
   margin-top: 15px;
   width: 180px;
 }

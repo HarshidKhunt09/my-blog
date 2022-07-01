@@ -45,7 +45,7 @@ const YourArticleListPage = () => {
         credentials: 'include',
       });
       const body = await result.json();
-      console.log(body);
+      console.log({ message: 'Deleted Article ' + body.name });
       const newYourArticleList = yourArticleList.filter((yourArticle) => {
         return yourArticle.name !== name;
       });
