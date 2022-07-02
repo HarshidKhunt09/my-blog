@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import navIcon from '../icons/navbar.png';
 import useUser from '../auth/useUser';
 import useToken from '../auth/useToken';
 
 const NavBar = () => {
   const [token] = useToken();
   const user = useUser();
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   const { state, dispatch } = useContext(UserContext);
 
@@ -51,19 +53,29 @@ const NavBar = () => {
   };
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
-        <li>
-          <Link to='/about'>About</Link>
-        </li>
-        <li>
-          <Link to='/articles-list'>Articles</Link>
-        </li>
-        <RenderMenu />
-      </ul>
+    <nav className='nav'>
+      <img
+        src={navIcon}
+        alt='nav-icon'
+        id='nav-icon'
+        onClick={() => {
+          setIsNavExpanded(!isNavExpanded);
+        }}
+      />
+      <div className={isNavExpanded ? 'expanded' : 'nav'}>
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/articles-list'>Articles</Link>
+          </li>
+          <RenderMenu />
+        </ul>
+      </div>
     </nav>
   );
 };
