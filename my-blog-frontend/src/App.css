@@ -24,6 +24,7 @@ h6 {
 
 nav {
   border-bottom: 4px solid black;
+  text-align: center;
   position: fixed;
   top: 0;
   width: 100%;
@@ -33,7 +34,6 @@ nav {
 
 nav ul {
   list-style-type: none;
-  margin-left: 380px;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
@@ -59,7 +59,7 @@ nav a:hover {
 
 #page-body {
   max-width: 700px;
-  margin-left: 440px;
+  margin: auto;
   padding-top: 64px;
 }
 

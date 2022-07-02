@@ -11,10 +11,11 @@ import SignOut from './pages/SignOut';
 import NotFoundPage from './pages/NotFoundPage';
 import NavBar from './components/NavBar';
 import YourArticleListPage from './pages/YourArticleListPage';
+import UserProfilePage from './pages/UserProfilePage';
 import PrivateRoute from './auth/PrivateRoute';
-import './App.css';
 import { createContext, useReducer, useState, useEffect } from 'react';
 import { initialState, reducer } from './reducer/UseReducer';
+import './App.css';
 
 export const UserContext = createContext();
 
@@ -92,6 +93,7 @@ function App() {
                 />
               }
             />
+            <Route path='/profile/:name' element={<UserProfilePage />} />
             <Route path='/signIn' element={<SignInPage />} />
             <Route path='/signUp' element={<SignUpPage />} />
             <Route path='/signOut' element={<SignOut />} />

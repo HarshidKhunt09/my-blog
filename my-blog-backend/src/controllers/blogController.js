@@ -89,6 +89,8 @@ export const signUp = async (req, res) => {
       jwt.sign(
         {
           id: _id,
+          name,
+          email,
         },
         'Hello',
         {
@@ -119,13 +121,13 @@ export const signIn = async (req, res) => {
 
     if (!userExist) return res.status(500).json({ error: 'User not Found' });
 
-    const { _id: id, passwordHash } = userExist;
+    const { _id: id, name, passwordHash } = userExist;
 
     const isCorrect = await bcrypt.compare(password, passwordHash);
 
     if (isCorrect) {
       jwt.sign(
-        { id },
+        { id, name, email: userExist.email },
         'Hello',
         {
           expiresIn: '2d',

@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import useUser from '../auth/useUser';
 import useToken from '../auth/useToken';
 
 const NavBar = () => {
   const [token] = useToken();
+  const user = useUser();
 
   const { state, dispatch } = useContext(UserContext);
 
@@ -25,6 +27,9 @@ const NavBar = () => {
           </li>
           <li>
             <Link to='/articles/your-articles'>Your Articles</Link>
+          </li>
+          <li>
+            <Link to={`/profile/${user.name}`}>Profile</Link>
           </li>
           <li>
             <Link to='/signOut'>Sign Out</Link>

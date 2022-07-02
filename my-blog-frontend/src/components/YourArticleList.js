@@ -6,7 +6,7 @@ import editIcon from '../icons/edit.png';
 const YourArticleList = ({ articles, deleteArticleHandler }) => {
   return (
     <>
-      {articles.map((article, key) => {
+      {articles?.map((article, key) => {
         return (
           <div className='article-list-item' key={key}>
             <div id='article-list'>
@@ -29,9 +29,9 @@ const YourArticleList = ({ articles, deleteArticleHandler }) => {
                 />
               </Link>
             </div>
-            <Link to={`/article/${article.name}`}>
-              <h6>Name: {article.name}</h6>
-              <p>{article.content[0].substring(0, 150)}...</p>
+            <Link to={`/article/${article?.name}`}>
+              <h6>Name: {article?.name}</h6>
+              <p>{article?.content[0]?.substring(0, 150)}...</p>
             </Link>
           </div>
         );
