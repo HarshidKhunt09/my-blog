@@ -281,7 +281,7 @@ nav a:hover {
   }
 
   h1 {
-    margin-top: 0px;
+    margin-top: 30px;
   }
 
   #add-comment-form input {
@@ -289,7 +289,7 @@ nav a:hover {
   }
 
   #signUp-form button, #signIn-form button {
-    width: 100%;
+    width: 40%;
     margin-bottom: 30px;
   }
 
