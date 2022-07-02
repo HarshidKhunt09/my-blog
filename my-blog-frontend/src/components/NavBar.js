@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import useThemeSwitcher from '../hooks/useThemeSwitcher';
 import navIcon from '../icons/navbar.png';
 import useUser from '../auth/useUser';
 import useToken from '../auth/useToken';
@@ -9,6 +10,7 @@ const NavBar = () => {
   const [token] = useToken();
   const user = useUser();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const ThemeSwitcher = useThemeSwitcher();
 
   const { state, dispatch } = useContext(UserContext);
 
@@ -31,7 +33,7 @@ const NavBar = () => {
             <Link to='/articles/your-articles'>Your Articles</Link>
           </li>
           <li>
-            <Link to={`/profile/${user.name}`}>Profile</Link>
+            <Link to={'/profile'}>Profile</Link>
           </li>
           <li>
             <Link to='/signOut'>Sign Out</Link>
@@ -74,6 +76,7 @@ const NavBar = () => {
             <Link to='/articles-list'>Articles</Link>
           </li>
           <RenderMenu />
+          {ThemeSwitcher}
         </ul>
       </div>
     </nav>

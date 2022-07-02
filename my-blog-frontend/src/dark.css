@@ -1,0 +1,123 @@
+body.dark-mode {
+    background-color: black;
+    color: #fff;
+}
+
+body.dark-mode button {
+    background-color: #fff;
+    color: #1d2127;  
+}
+
+body.dark-mode nav {
+    border-bottom: 4px solid #fff;
+    background-color: #12171e;
+}
+
+body.dark-mode nav a {
+    color: #fff;
+}
+
+body.dark-mode nav a:hover {
+    background: #fff;
+    color: black;
+}
+
+body.dark-mode .article-list-item {
+    color: #fff;
+}
+
+body.dark-mode .article-list-item p {
+    border-bottom: 2px solid #fff;
+}
+
+body.dark-mode .article-list-item a{
+    color: #fff;
+}
+
+body.dark-mode #add-comment-form {
+    border-bottom: 2px solid #fff;
+}
+
+body.dark-mode #add-comment-form input, textarea {
+    color: #fff;
+    background-color: #12171e;
+    border: 2px solid #fff;
+}
+
+body.dark-mode #add-comment-form button {
+    color: #fff;
+    background-color: #12171e;
+    border-bottom: 2px solid #fff;
+}
+
+body.dark-mode #upvotes-section button {
+    color: #fff;
+    background-color: #12171e;
+    border-bottom: 2px solid #fff;
+  }
+
+body.dark-mode .comment {
+    border-bottom: 2px solid #fff;
+    padding: 16px;
+}
+
+body.dark-mode #signUp-form input ,body.dark-mode #signIn-form input {
+    color: #fff;
+    background-color: #12171e;
+    border: 2px solid #fff;
+}
+
+body.dark-mode #signUp-form button,body.dark-mode #signIn-form button {
+    color: #fff;
+    background-color: #12171e;
+    border-bottom: 2px solid #fff;
+}
+
+body.dark-mode #articles-body input {
+    color: #fff;
+    background-color: #12171e;
+    border: 2px solid #fff;
+}
+
+body.dark-mode #articles-body button {
+    color: #fff;
+    background-color: #12171e;
+    border-bottom: 2px solid #fff;
+}
+
+body.dark-mode #articles-body button:focus{
+    color: black;
+    background: olive;
+}
+
+body.dark-mode #add-article-form input,body.dark-mode #update-article-form input {
+    color: #fff;
+    background-color: #12171e;
+    border: 2px solid #fff;
+}
+
+body.dark-mode #add-article-form textarea,body.dark-mode #update-article-form textarea {
+    color: #fff;
+    background-color: #12171e;
+    border: 2px solid #fff;
+}
+
+body.dark-mode #add-article-form button, body.dark-mode #update-article-form button {
+    color: #fff;
+    background-color: #12171e;
+    border-bottom: 2px solid #fff;
+  }
+
+body.dark-mode #delete-icon {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+body.dark-mode #edit-icon {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+body.dark-mode #nav-icon {
+    background-color: #fff;
+  }

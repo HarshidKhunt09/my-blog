@@ -16,6 +16,7 @@ import PrivateRoute from './auth/PrivateRoute';
 import { createContext, useReducer, useState, useEffect } from 'react';
 import { initialState, reducer } from './reducer/UseReducer';
 import './App.css';
+import './dark.css';
 
 export const UserContext = createContext();
 
@@ -38,7 +39,6 @@ function App() {
         const body = await result.json();
         setArticleList(body);
         setLoading(false);
-        console.log(body);
       } catch (error) {
         console.log(error);
       }
@@ -93,7 +93,7 @@ function App() {
                 />
               }
             />
-            <Route path='/profile/:name' element={<UserProfilePage />} />
+            <Route path='/profile' element={<UserProfilePage />} />
             <Route path='/signIn' element={<SignInPage />} />
             <Route path='/signUp' element={<SignUpPage />} />
             <Route path='/signOut' element={<SignOut />} />
