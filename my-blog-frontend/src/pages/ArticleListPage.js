@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ArticleList from '../components/ArticleList';
+import { motion } from 'framer-motion';
 
 const ArticleListPage = ({ articleList }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +23,12 @@ const ArticleListPage = ({ articleList }) => {
     });
 
   return (
-    <div id='articles-body'>
+    <motion.div
+      id='articles-body'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>Articles</h1>
       <input
         type='text'
@@ -40,7 +46,7 @@ const ArticleListPage = ({ articleList }) => {
         <button onClick={() => setOrderBy('normal')}>Normal</button>
       </div>
       <ArticleList articles={FilteredArticleList} />
-    </div>
+    </motion.div>
   );
 };
 

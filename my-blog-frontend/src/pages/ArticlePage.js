@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import ArticleList from '../components/ArticleList';
 import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
@@ -74,7 +75,11 @@ const ArticlePage = ({ articleList }) => {
   if (!article) return <NotFoundPage />;
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>{article?.title}</h1>
       <UpvotesSection
         articleName={name}
@@ -88,7 +93,7 @@ const ArticlePage = ({ articleList }) => {
       <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
       <h3>Other Articles:</h3>
       <ArticleList articles={otherArticles} />
-    </>
+    </motion.div>
   );
 };
 

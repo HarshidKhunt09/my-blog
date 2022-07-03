@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import useToken from '../auth/useToken';
 
 const AddArticlePage = ({ articleList, setArticleList }) => {
@@ -34,7 +35,12 @@ const AddArticlePage = ({ articleList, setArticleList }) => {
   };
 
   return (
-    <div id='add-article-form'>
+    <motion.div
+      id='add-article-form'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>Add Article</h1>
       <label>
         Article Name:
@@ -62,7 +68,7 @@ const AddArticlePage = ({ articleList, setArticleList }) => {
         />
       </label>
       <button onClick={() => addArticle()}>Add Article</button>
-    </div>
+    </motion.div>
   );
 };
 

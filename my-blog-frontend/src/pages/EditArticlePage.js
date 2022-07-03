@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import NotFoundPage from './NotFoundPage';
 import useToken from '../auth/useToken';
 
@@ -55,7 +56,12 @@ const EditArticlePage = ({ articleList, setArticleList }) => {
   if (!articleDetail) return <NotFoundPage />;
 
   return (
-    <div id='update-article-form'>
+    <motion.div
+      id='update-article-form'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>Update Article</h1>
       <label>
         Article Name:
@@ -83,7 +89,7 @@ const EditArticlePage = ({ articleList, setArticleList }) => {
         />
       </label>
       <button onClick={updateArticle}>Update Article</button>
-    </div>
+    </motion.div>
   );
 };
 

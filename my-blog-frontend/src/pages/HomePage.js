@@ -1,8 +1,13 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const HomePage = () => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>Hello, welcome to my blog!</h1>
       <p>
         Welcome to my blog! Proin congue ligula id risus posuere, vel eleifend
@@ -30,7 +35,7 @@ const HomePage = () => {
         vulputate urna lorem nec nisi. Morbi id consequat quam. Vivamus accumsan
         dui in facilisis aliquet.,
       </p>
-    </>
+    </motion.div>
   );
 };
 

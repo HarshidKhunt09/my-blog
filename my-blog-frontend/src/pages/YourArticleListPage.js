@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import YourArticleList from '../components/YourArticleList';
 import useToken from '../auth/useToken';
+import { motion } from 'framer-motion';
 
 const YourArticleListPage = () => {
   const navigate = useNavigate();
@@ -56,13 +57,17 @@ const YourArticleListPage = () => {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1>Your Articles</h1>
       <YourArticleList
         articles={yourArticleList}
         deleteArticleHandler={deleteArticleHandler}
       />
-    </>
+    </motion.div>
   );
 };
 

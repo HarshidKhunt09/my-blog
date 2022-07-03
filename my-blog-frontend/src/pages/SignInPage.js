@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import { motion } from 'framer-motion';
 import useToken from '../auth/useToken';
 
 const SignInPage = () => {
@@ -34,7 +35,12 @@ const SignInPage = () => {
   };
 
   return (
-    <div id='signIn-form'>
+    <motion.div
+      id='signIn-form'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h2>Sign In</h2>
       <p>
         Don't have an account?
@@ -61,7 +67,7 @@ const SignInPage = () => {
       </label>
       <br />
       <button onClick={signIn}>Sign In</button>
-    </div>
+    </motion.div>
   );
 };
 

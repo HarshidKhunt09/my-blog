@@ -14,6 +14,8 @@ import YourArticleListPage from './pages/YourArticleListPage';
 import UserProfilePage from './pages/UserProfilePage';
 import PrivateRoute from './auth/PrivateRoute';
 import { createContext, useReducer, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { initialState, reducer } from './reducer/UseReducer';
 import './App.css';
 import './dark.css';
@@ -24,6 +26,7 @@ function App() {
   const [articleList, setArticleList] = useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -56,49 +59,51 @@ function App() {
       <UserContext.Provider value={{ state, dispatch }}>
         <NavBar />
         <div id='page-body'>
-          <Routes>
-            <Route path='/' element={<HomePage />} exact />
-            <Route path='/about' element={<AboutPage />} />
-            <Route
-              path='/articles-list'
-              element={<ArticleListPage articleList={articleList} />}
-            />
-            <Route
-              path='/article/:name'
-              element={
-                <PrivateRoute>
-                  <ArticlePage articleList={articleList} />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path='/add-article'
-              element={
-                <AddArticlePage
-                  articleList={articleList}
-                  setArticleList={setArticleList}
-                />
-              }
-            />
-            <Route
-              path='/articles/your-articles'
-              element={<YourArticleListPage />}
-            />
-            <Route
-              path='/article/edit/:name'
-              element={
-                <EditArticlePage
-                  articleList={articleList}
-                  setArticleList={setArticleList}
-                />
-              }
-            />
-            <Route path='/profile' element={<UserProfilePage />} />
-            <Route path='/signIn' element={<SignInPage />} />
-            <Route path='/signUp' element={<SignUpPage />} />
-            <Route path='/signOut' element={<SignOut />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
+          <AnimatePresence>
+            <Routes navigate={navigate} key={navigate.pathname}>
+              <Route path='/' element={<HomePage />} exact />
+              <Route path='/about' element={<AboutPage />} />
+              <Route
+                path='/articles-list'
+                element={<ArticleListPage articleList={articleList} />}
+              />
+              <Route
+                path='/article/:name'
+                element={
+                  <PrivateRoute>
+                    <ArticlePage articleList={articleList} />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='/add-article'
+                element={
+                  <AddArticlePage
+                    articleList={articleList}
+                    setArticleList={setArticleList}
+                  />
+                }
+              />
+              <Route
+                path='/articles/your-articles'
+                element={<YourArticleListPage />}
+              />
+              <Route
+                path='/article/edit/:name'
+                element={
+                  <EditArticlePage
+                    articleList={articleList}
+                    setArticleList={setArticleList}
+                  />
+                }
+              />
+              <Route path='/profile' element={<UserProfilePage />} />
+              <Route path='/signIn' element={<SignInPage />} />
+              <Route path='/signUp' element={<SignUpPage />} />
+              <Route path='/signOut' element={<SignOut />} />
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </AnimatePresence>
         </div>
       </UserContext.Provider>
     </div>
