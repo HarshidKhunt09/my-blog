@@ -1,5 +1,5 @@
 body.dark-mode {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.950);
     color: #fff;
 }
 
@@ -38,7 +38,7 @@ body.dark-mode #add-comment-form {
     border-bottom: 2px solid #fff;
 }
 
-body.dark-mode #add-comment-form input, textarea {
+body.dark-mode #add-comment-form input,body.dark-mode textarea {
     color: #fff;
     background-color: #12171e;
     border: 2px solid #fff;
@@ -106,18 +106,4 @@ body.dark-mode #add-article-form button, body.dark-mode #update-article-form but
     color: #fff;
     background-color: #12171e;
     border-bottom: 2px solid #fff;
-  }
-
-body.dark-mode #delete-icon {
-    background-color: #fff;
-    cursor: pointer;
 }
-
-body.dark-mode #edit-icon {
-    background-color: #fff;
-    cursor: pointer;
-}
-
-body.dark-mode #nav-icon {
-    background-color: #fff;
-  }

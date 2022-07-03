@@ -1,14 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import useThemeSwitcher from '../hooks/useThemeSwitcher';
-import navIcon from '../icons/navbar.png';
-import useUser from '../auth/useUser';
 import useToken from '../auth/useToken';
 
 const NavBar = () => {
   const [token] = useToken();
-  const user = useUser();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const ThemeSwitcher = useThemeSwitcher();
 
@@ -56,8 +55,8 @@ const NavBar = () => {
 
   return (
     <nav className='nav'>
-      <img
-        src={navIcon}
+      <FontAwesomeIcon
+        icon={faBars}
         alt='nav-icon'
         id='nav-icon'
         onClick={() => {

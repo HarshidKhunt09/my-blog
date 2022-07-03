@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import deleteIcon from '../icons/delete.png';
-import editIcon from '../icons/edit.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 const YourArticleList = ({ articles, deleteArticleHandler }) => {
   return (
@@ -13,17 +14,17 @@ const YourArticleList = ({ articles, deleteArticleHandler }) => {
               <Link to={`/article/${article.name}`}>
                 <h3>{article.title}</h3>
               </Link>
-              <img
+              <FontAwesomeIcon
+                icon={faTrashCan}
                 id='delete-icon'
-                src={deleteIcon}
                 alt='delete-icon'
                 height='25px'
                 onClick={() => deleteArticleHandler(article.name)}
               />
               <Link to={`/article/edit/${article.name}`}>
-                <img
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
                   id='edit-icon'
-                  src={editIcon}
                   alt='edit-icon'
                   height='25px'
                 />
