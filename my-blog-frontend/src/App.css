@@ -213,12 +213,14 @@ nav a:hover {
 #delete-icon {
   position: absolute;
   right: 50px;
+  top: 40px;
   cursor: pointer;
 }
 
 #edit-icon {
   position: absolute;
   right: 90px;
+  top: 40px;
   cursor: pointer;
 }
 
@@ -261,6 +263,10 @@ nav a:hover {
     font-weight: bold;
   }
 
+  nav a:hover {
+    background: #12171ec6;
+  }
+
   #page-body {
     padding-left: 15px;
     padding-right: 15px;
@@ -292,7 +298,7 @@ nav a:hover {
     margin-bottom: 30px;
   }
 
-  #add-article-form textarea {
+  #add-article-form textarea, #update-article-form textarea {
     width: 90%;
     height: auto;
   }

@@ -18,7 +18,7 @@ body.dark-mode nav a {
 }
 
 body.dark-mode nav a:hover {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.508);
     color: black;
 }
 

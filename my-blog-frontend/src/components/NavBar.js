@@ -26,16 +26,44 @@ const NavBar = () => {
       return (
         <>
           <li>
-            <Link to='/add-article'>Add Article</Link>
+            <Link
+              to='/add-article'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Add Article
+            </Link>
           </li>
           <li>
-            <Link to='/articles/your-articles'>Your Articles</Link>
+            <Link
+              to='/articles/your-articles'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Your Articles
+            </Link>
           </li>
           <li>
-            <Link to={'/profile'}>Profile</Link>
+            <Link
+              to={'/profile'}
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Profile
+            </Link>
           </li>
           <li>
-            <Link to='/signOut'>Sign Out</Link>
+            <Link
+              to='/signOut'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Sign Out
+            </Link>
           </li>
         </>
       );
@@ -43,10 +71,24 @@ const NavBar = () => {
       return (
         <>
           <li>
-            <Link to='/signUp'>Sign Up</Link>
+            <Link
+              to='/signUp'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Sign Up
+            </Link>
           </li>
           <li>
-            <Link to='/signIn'>Sign In</Link>
+            <Link
+              to='/signIn'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Sign In
+            </Link>
           </li>
         </>
       );
@@ -66,13 +108,34 @@ const NavBar = () => {
       <div className={isNavExpanded ? 'expanded' : 'nav'}>
         <ul>
           <li>
-            <Link to='/'>Home</Link>
+            <Link
+              to='/'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link
+              to='/about'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              About
+            </Link>
           </li>
           <li>
-            <Link to='/articles-list'>Articles</Link>
+            <Link
+              to='/articles-list'
+              onClick={() => {
+                setIsNavExpanded(!isNavExpanded);
+              }}
+            >
+              Articles
+            </Link>
           </li>
           <RenderMenu />
           {ThemeSwitcher}
