@@ -4,7 +4,7 @@ import YourArticleList from '../components/YourArticleList';
 import useToken from '../auth/useToken';
 import { motion } from 'framer-motion';
 
-const YourArticleListPage = () => {
+const YourArticleListPage = ({ articleList, setArticleList }) => {
   const navigate = useNavigate();
   const [token] = useToken();
   const [yourArticleList, setYourArticleList] = useState([]);
@@ -51,6 +51,10 @@ const YourArticleListPage = () => {
         return yourArticle.name !== name;
       });
       setYourArticleList(newYourArticleList);
+      const newArticleList = articleList.filter((article) => {
+        return article.name !== name;
+      });
+      setArticleList(newArticleList);
     } catch (error) {
       console.log(error);
     }

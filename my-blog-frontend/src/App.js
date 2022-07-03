@@ -41,6 +41,7 @@ function App() {
         });
         const body = await result.json();
         setArticleList(body);
+        console.log(body);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -86,7 +87,12 @@ function App() {
               />
               <Route
                 path='/articles/your-articles'
-                element={<YourArticleListPage />}
+                element={
+                  <YourArticleListPage
+                    articleList={articleList}
+                    setArticleList={setArticleList}
+                  />
+                }
               />
               <Route
                 path='/article/edit/:name'
