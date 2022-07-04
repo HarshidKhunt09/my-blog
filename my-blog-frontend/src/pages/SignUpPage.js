@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
 import { motion } from 'framer-motion';
 import useToken from '../auth/useToken';
+import usePasswordToggle from '../hooks/usePasswordToggle';
 
 const SignUpPage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -18,6 +19,9 @@ const SignUpPage = () => {
     password: '',
     confirmPassword: '',
   });
+  const [passwordInputType, passwordToggleIcon] = usePasswordToggle();
+  const [confirmPasswordInputType, confirmPasswordToggleIcon] =
+    usePasswordToggle();
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,20 +73,22 @@ const SignUpPage = () => {
       <label>
         Password:
         <input
-          type='text'
+          type={passwordInputType}
           name='password'
           onChange={onChange}
           value={formData.password}
         />
+        <div className='password-toggle-icon'>{passwordToggleIcon}</div>
       </label>
       <label>
         Confirm Password:
         <input
-          type='text'
+          type={confirmPasswordInputType}
           name='confirmPassword'
           onChange={onChange}
           value={formData.confirmPassword}
         />
+        <div className='password-toggle-icon'>{confirmPasswordToggleIcon}</div>
       </label>
       <br />
       <button onClick={signUp}>Sign Up</button>

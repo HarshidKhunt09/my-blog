@@ -264,6 +264,15 @@ nav a:hover {
   }
 }
 
+.password-toggle-icon {
+  position: relative;
+  width: 20px;
+  left: 280px;
+  bottom: 50px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
 
   #nav-icon {
@@ -339,6 +348,12 @@ nav a:hover {
 
   #add-comment-form button {
     width: 200px;
+  }
+
+  .password-toggle-icon {
+    left: 190px;
+    bottom: 48px;
+    font-size: 15px;
   }
   
 }

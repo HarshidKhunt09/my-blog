@@ -41,7 +41,6 @@ function App() {
         });
         const body = await result.json();
         setArticleList(body);
-        console.log(body);
         setLoading(false);
       } catch (error) {
         console.log(error);

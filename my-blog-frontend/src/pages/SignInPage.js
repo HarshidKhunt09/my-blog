@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../App';
 import { motion } from 'framer-motion';
 import useToken from '../auth/useToken';
+import usePasswordToggle from '../hooks/usePasswordToggle';
 
 const SignInPage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -12,6 +13,7 @@ const SignInPage = () => {
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [passwordInputType, passwordToggleIcon] = usePasswordToggle();
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,11 +61,12 @@ const SignInPage = () => {
       <label>
         Password:
         <input
-          type='text'
+          type={passwordInputType}
           name='password'
           onChange={onChange}
           value={formData.password}
         />
+        <div className='password-toggle-icon'>{passwordToggleIcon}</div>
       </label>
       <br />
       <button onClick={signIn}>Sign In</button>
