@@ -107,3 +107,8 @@ body.dark-mode #add-article-form button, body.dark-mode #update-article-form but
     background-color: #12171e;
     border-bottom: 2px solid #fff;
 }
+
+body.dark-mode .scroll-to-top {
+    background-color: rgba(255, 255, 255, 0.479);
+    color: black;
+}

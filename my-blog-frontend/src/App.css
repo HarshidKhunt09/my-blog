@@ -234,6 +234,36 @@ nav a:hover {
   display: none;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 12px;
+  left: 75%;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #12171e72;
+  color: white;
+}
+
+#scroll-to-top-icon {
+  margin-top: 12px;
+  margin-left: 13.5px;
+  height: 15px;
+  animation: scrollTop 0.5s alternate ease infinite;
+}
+
+@keyframes scrollTop {
+  from{
+    transform: translateY(2px);
+  }to{
+    transform: translateY(-1px);
+  }
+}
+
 @media screen and (max-width: 768px) {
 
   #nav-icon {

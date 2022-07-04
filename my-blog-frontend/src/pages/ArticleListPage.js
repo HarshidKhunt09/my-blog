@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ArticleList from '../components/ArticleList';
 import { motion } from 'framer-motion';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const ArticleListPage = ({ articleList }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,6 +47,7 @@ const ArticleListPage = ({ articleList }) => {
         <button onClick={() => setOrderBy('normal')}>Normal</button>
       </div>
       <ArticleList articles={FilteredArticleList} />
+      <ScrollToTop />
     </motion.div>
   );
 };

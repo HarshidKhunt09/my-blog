@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import YourArticleList from '../components/YourArticleList';
-import useToken from '../auth/useToken';
 import { motion } from 'framer-motion';
+import YourArticleList from '../components/YourArticleList';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import useToken from '../auth/useToken';
 
 const YourArticleListPage = ({ articleList, setArticleList }) => {
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ const YourArticleListPage = ({ articleList, setArticleList }) => {
         articles={yourArticleList}
         deleteArticleHandler={deleteArticleHandler}
       />
+      <ScrollToTop />
     </motion.div>
   );
 };

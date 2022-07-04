@@ -8,6 +8,7 @@ import UpvotesSection from '../components/UpvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
 import useToken from '../auth/useToken';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const ArticlePage = ({ articleList }) => {
   // eslint-disable-next-line no-unused-vars
@@ -93,6 +94,7 @@ const ArticlePage = ({ articleList }) => {
       <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
       <h3>Other Articles:</h3>
       <ArticleList articles={otherArticles} />
+      <ScrollToTop />
     </motion.div>
   );
 };
