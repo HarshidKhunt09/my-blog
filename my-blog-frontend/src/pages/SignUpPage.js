@@ -8,7 +8,6 @@ import usePasswordToggle from '../hooks/usePasswordToggle';
 const SignUpPage = () => {
   // eslint-disable-next-line no-unused-vars
   const { state, dispatch } = useContext(UserContext);
-
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useToken();
