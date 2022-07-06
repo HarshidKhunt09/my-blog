@@ -39,7 +39,7 @@ const SignUpPage = () => {
     const { token } = body;
     setToken(token);
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
-    navigate('/');
+    navigate('/please-verify');
     dispatch({ type: 'USER', payload: true });
   };
 

@@ -12,6 +12,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import NavBar from './components/NavBar';
 import YourArticleListPage from './pages/YourArticleListPage';
 import UserProfilePage from './pages/UserProfilePage';
+import PleaseVerifyEmailPage from './pages/PleaseVerifyEmailPage';
+import EmailVerificationLandingPage from './pages/EmailVerificationLandingPage';
 import PrivateRoute from './auth/PrivateRoute';
 import { createContext, useReducer, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -103,6 +105,14 @@ function App() {
                 }
               />
               <Route path='/profile' element={<UserProfilePage />} />
+              <Route
+                path='/please-verify'
+                element={<PleaseVerifyEmailPage />}
+              />
+              <Route
+                path='/verify-email/:verificationString'
+                element={<EmailVerificationLandingPage />}
+              />
               <Route path='/signIn' element={<SignInPage />} />
               <Route path='/signUp' element={<SignUpPage />} />
               <Route path='/signOut' element={<SignOut />} />

@@ -11,6 +11,7 @@ import {
   yourArticles,
   deleteArticle,
   updateArticle,
+  verifyEmail,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
 
@@ -37,6 +38,8 @@ const routes = (app) => {
   app.route('/api/articles/:name/add-comment').post(addComments);
 
   app.route('/api/articles-list').get(getArticlesList);
+
+  app.route('/api/verify-email').put(verifyEmail);
 };
 
 export default routes;

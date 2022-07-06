@@ -1,6 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
+import sendEmail from '../util/sendEmail';
+import { v4 as uuid } from 'uuid';
+import { ObjectId } from 'mongodb';
 import {
   ArticlesInfoSchema,
   BlogSchema,
@@ -75,16 +78,30 @@ export const signUp = async (req, res) => {
       const passwordHash = await bcrypt.hash(password, 10);
       const confirmPasswordHash = await bcrypt.hash(confirmPassword, 10);
 
+      const verificationString = uuid();
+
       const newUser = new Users({
         name: name,
         email: email,
         passwordHash: passwordHash,
         confirmPasswordHash: confirmPasswordHash,
+        isVerified: false,
+        verificationString,
       });
 
       await newUser.save();
 
       const { _id } = newUser;
+
+      await sendEmail({
+        to: email,
+        from: 'harshidkhunt05yt@gmail.com',
+        subject: 'Please verify your email',
+        text: `
+            Thanks for signing up! To verify your email, click here: 
+            http://localhost:3000/verify-email/${verificationString}
+          `,
+      });
 
       jwt.sign(
         {
@@ -273,5 +290,45 @@ export const updateArticle = async (req, res) => {
     res.send(updatedNewArticle);
   } catch (error) {
     res.status(404).send(error);
+  }
+};
+
+export const verifyEmail = async (req, res) => {
+  const { verificationString } = req.body;
+
+  try {
+    const userExist = await Users.findOne({ verificationString });
+
+    if (!userExist) return res.status(500).json({ error: 'User not Found' });
+
+    const { _id: id, name, email } = userExist;
+
+    await Users.findByIdAndUpdate(
+      { _id: ObjectId(id) },
+      {
+        $set: { isVerified: true },
+      },
+      { new: true, useFindAndModify: false }
+    );
+
+    jwt.sign(
+      {
+        id,
+        name,
+        email,
+      },
+      'Hello',
+      {
+        expiresIn: '2d',
+      },
+      (error, token) => {
+        if (error) {
+          return res.status(500).send(error);
+        }
+        res.status(200).json({ token });
+      }
+    );
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
