@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './src/routes/blogRoutes';
@@ -7,16 +8,21 @@ const PORT = 8000;
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect('mongodb://localhost/my-blog', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    'mongodb+srv://harshid:harshid@cluster0.m8bk8ef.mongodb.net/coding-blogs',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log('Connection is successful');
   })
   .catch((e) => {
     console.log('No Connection');
   });
+
+console.log(process.env.SECRET);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
