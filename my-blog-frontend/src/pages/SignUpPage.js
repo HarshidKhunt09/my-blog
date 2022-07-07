@@ -4,6 +4,7 @@ import { UserContext } from '../App';
 import { motion } from 'framer-motion';
 import useToken from '../auth/useToken';
 import usePasswordToggle from '../hooks/usePasswordToggle';
+import useButtonLoader from '../hooks/useButtonLoader';
 
 const SignUpPage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -18,6 +19,10 @@ const SignUpPage = () => {
     password: '',
     confirmPassword: '',
   });
+  const [signUpButtonElement, setSignUpLoading] = useButtonLoader(
+    'Sign Up',
+    'Sign Up ...'
+  );
   const [passwordInputType, passwordToggleIcon] = usePasswordToggle();
   const [confirmPasswordInputType, confirmPasswordToggleIcon] =
     usePasswordToggle();
@@ -28,6 +33,7 @@ const SignUpPage = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
+    setSignUpLoading(true);
     const result = await fetch('api/signUp', {
       method: 'post',
       body: JSON.stringify(formData),
@@ -38,6 +44,7 @@ const SignUpPage = () => {
     const body = await result.json();
     const { token } = body;
     setToken(token);
+    setSignUpLoading(false);
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
     navigate('/please-verify');
     dispatch({ type: 'USER', payload: true });
@@ -90,7 +97,9 @@ const SignUpPage = () => {
         <div className='password-toggle-icon'>{confirmPasswordToggleIcon}</div>
       </label>
       <br />
-      <button onClick={signUp}>Sign Up</button>
+      <button onClick={signUp} ref={signUpButtonElement}>
+        Sign Up
+      </button>
     </motion.div>
   );
 };
