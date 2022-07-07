@@ -32,7 +32,7 @@ const EmailVerificationLandingPage = () => {
       }
     };
     loadVerification();
-  }, [setToken, verificationString]);
+  }, []);
 
   if (isLoading)
     return (

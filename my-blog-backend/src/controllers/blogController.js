@@ -172,7 +172,12 @@ export const addArticle = async (req, res) => {
 
     const articleContentArray = articleContent.split(',');
 
-    const { _id, name, email } = req.rootUser;
+    const { _id, name, email, isVerified } = req.rootUser;
+
+    if (!isVerified)
+      return res.status(403).json({
+        message: 'You need to verify your email before you can add article',
+      });
 
     const newArticle = new ArticlesInfo({
       name,
