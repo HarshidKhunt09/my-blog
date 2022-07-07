@@ -8,21 +8,16 @@ const PORT = 8000;
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(
-    'mongodb+srv://harshid:harshid@cluster0.m8bk8ef.mongodb.net/coding-blogs',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log('Connection is successful');
   })
   .catch((e) => {
-    console.log('No Connection');
+    console.log('No Connection', e);
   });
-
-console.log(process.env.SECRET);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
