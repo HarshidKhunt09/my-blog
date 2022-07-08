@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import routes from './src/routes/blogRoutes';
 
 const app = express();
-const PORT = 8000;
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -24,6 +23,6 @@ app.use(express.json());
 
 routes(app);
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log(`Your server is running on port ${PORT}`);
 });
