@@ -24,5 +24,5 @@ app.use(express.json());
 routes(app);
 
 app.listen(process.env.PORT || 8000, () => {
-  console.log(`Your server is running on port ${PORT}`);
+  console.log(`Your server is running ...`);
 });
