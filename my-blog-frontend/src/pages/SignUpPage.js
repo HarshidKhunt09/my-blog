@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
 import { motion } from 'framer-motion';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useToken from '../auth/useToken';
 import usePasswordToggle from '../hooks/usePasswordToggle';
 import useButtonLoader from '../hooks/useButtonLoader';
@@ -45,8 +47,14 @@ const SignUpPage = () => {
     const { token } = body;
     setToken(token);
     setSignUpLoading(false);
+    toast.success('Sign Up Successfully', {
+      autoClose: 4000,
+      theme: 'dark',
+    });
     setFormData({ name: '', email: '', password: '', confirmPassword: '' });
-    navigate('/please-verify');
+    setTimeout(() => {
+      navigate('/please-verify');
+    }, 3000);
     dispatch({ type: 'USER', payload: true });
   };
 
@@ -100,6 +108,7 @@ const SignUpPage = () => {
       <button onClick={signUp} ref={signUpButtonElement}>
         Sign Up
       </button>
+      <ToastContainer />
     </motion.div>
   );
 };
