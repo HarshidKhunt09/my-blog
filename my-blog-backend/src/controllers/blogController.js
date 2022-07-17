@@ -68,6 +68,7 @@ export const signUp = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body;
     const userExist = await Users.findOne({ email: email });
 
+    console.log(req.file.path);
     if (!name || !email || !password || !confirmPassword) {
       return res.status(422).json({ error: 'Plz filled the field properly' });
     } else if (userExist) {
@@ -85,6 +86,7 @@ export const signUp = async (req, res) => {
         email: email,
         passwordHash: passwordHash,
         confirmPasswordHash: confirmPasswordHash,
+        profileImage: req.file.filename,
         isVerified: false,
         verificationString,
       });
@@ -334,6 +336,22 @@ export const verifyEmail = async (req, res) => {
         res.status(200).json({ token });
       }
     );
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const getProfileImage = async (req, res) => {
+  const { name } = req.body;
+
+  try {
+    const userExist = await Users.findOne({ name });
+
+    if (!userExist) return res.status(500).json({ error: 'User not Found' });
+
+    const userProfileImage = userExist.profileImage;
+
+    res.send({ userProfileImage });
   } catch (error) {
     res.status(500).send(error);
   }

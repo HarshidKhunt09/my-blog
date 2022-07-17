@@ -21,6 +21,7 @@ const SignUpPage = () => {
     password: '',
     confirmPassword: '',
   });
+  const [file, setFile] = useState();
   const [signUpButtonElement, setSignUpLoading] = useButtonLoader(
     'Sign Up',
     'Sign Up ...'
@@ -36,12 +37,15 @@ const SignUpPage = () => {
   const signUp = async (e) => {
     e.preventDefault();
     setSignUpLoading(true);
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('password', formData.password);
+    data.append('confirmPassword', formData.confirmPassword);
+    data.append('profileImage', file);
     const result = await fetch('api/signUp', {
       method: 'post',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: data,
     });
     const body = await result.json();
     const { token } = body;
@@ -103,6 +107,14 @@ const SignUpPage = () => {
           value={formData.confirmPassword}
         />
         <div className='password-toggle-icon'>{confirmPasswordToggleIcon}</div>
+      </label>
+      <label>
+        Confirm Password:
+        <input
+          type='file'
+          name='profileImage'
+          onChange={(e) => setFile(e.target.files[0])}
+        />
       </label>
       <br />
       <button onClick={signUp} ref={signUpButtonElement}>

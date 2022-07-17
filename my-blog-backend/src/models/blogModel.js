@@ -31,6 +31,9 @@ export const SignUpSchema = new Schema({
   confirmPasswordHash: {
     type: String,
   },
+  profileImage: {
+    type: String,
+  },
   isVerified: {
     type: Boolean,
   },

@@ -12,11 +12,13 @@ import {
   deleteArticle,
   updateArticle,
   verifyEmail,
+  getProfileImage,
 } from '../controllers/blogController';
 import { authenticate } from '../../middleware/authenticate';
+import { upload } from '../../index';
 
 const routes = (app) => {
-  app.route('/api/signUp').post(signUp);
+  app.route('/api/signUp').post(upload, signUp);
 
   app.route('/api/signIn').post(signIn);
 
@@ -40,6 +42,8 @@ const routes = (app) => {
   app.route('/api/articles-list').get(getArticlesList);
 
   app.route('/api/verify-email').put(verifyEmail);
+
+  app.route('/api/profile-image').post(getProfileImage);
 };
 
 export default routes;
